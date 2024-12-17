@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "install-server": "docker pull oven/bun && docker run --rm --init --ulimit memlock=-1:-1 oven/bun && bun i",
+    "install-server": "bun i",
     "start-server": "cd packages/backend && bun start"
   }
 }
