@@ -1,0 +1,10 @@
+{
+  "name": "arkhet",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "cd packages/backend && bun dev"
+  }
+}
