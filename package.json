@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "cd packages/backend && bun dev"
+    "install-server": "powershell -c \"irm bun.sh/install.ps1|iex\" && bun i",
+    "start-server": "cd packages/backend && bun start"
   }
 }
