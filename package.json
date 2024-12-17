@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "install-server": "curl -fsSL https://bun.sh/install | bash && bun i",
+    "install-server": "docker pull oven/bun && docker run --rm --init --ulimit memlock=-1:-1 oven/bun && bun i",
     "start-server": "cd packages/backend && bun start"
   }
 }
