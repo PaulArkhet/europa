@@ -66,16 +66,9 @@ app.use(
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-const htmlContent = readFileSync(
-    path.join(__dirname, "../frontend/dist/index.html"),
-    "utf-8"
-);
+const frontendPath = path.join(__dirname, "../frontend/dist");
 
-// Routes
-app.get("/", (req: Request, res: Response) => {
-    res.status(200).send(htmlContent);
-});
+app.use(express.static(frontendPath));
 
 app.use("/api/v0/users", users);
 app.use("/api/v0/user", user);
@@ -83,6 +76,10 @@ app.use("/api/v0/projects", projects);
 app.use("/api/v0/datasets", datasets);
 app.use("/api/v0/ai", ai);
 app.use("/api/v0/styleguides", styleguides);
+
+app.get("*", (req: Request, res: Response) => {
+    res.status(200).sendFile(path.join(frontendPath, "index.html"));
+});
 
 // Start server
 server.listen(port, () => {
