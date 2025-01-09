@@ -13,23 +13,16 @@ export async function createProject(req: Request, res: Response) {
             });
         }
         const user_id = req.body.user_id;
-
-        // await db.insert(projects).values({
-        //     user_id,
-        //     title,
-        //     img_src: "",
-        //     wireframe: "[]",
-        // });
-
         const [InsertedNewProject] = await db
             .insert(projects)
-            .values({ user_id, title, img_src: "", wireframe: "[]" })
+            .values({
+                user_id,
+                title,
+                img_src: "",
+                wireframe:
+                    '[{"id":0,"xOffset":1560,"yOffset":1235.5,"width":800,"height":448,"minWidth":10,"minHeight":10,"isInstanceChild":false,"type":"page","subtype":"Desktop","title":"New Page","description":"Description & documentation - Lorem ipsum dolor sit amet, consectetur adipiscing elit."}]',
+            })
             .returning();
-
-        const newProjects = await db
-            .select()
-            .from(projects)
-            .where(eq(projects.user_id, user_id));
         res.status(200).json({
             success: true,
             content: InsertedNewProject,
